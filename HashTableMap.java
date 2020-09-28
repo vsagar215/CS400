@@ -229,7 +229,7 @@ public class HashTableMap implements MapADT<Integer, Patient> {
                         table[hashIndex] = null;
                         size -= 1;
                         if (removedNode.hasCovid()) {
-                            covidPos += 1;
+                            covidPos -= 1;
                         }
                     }
                     return removedNode;
