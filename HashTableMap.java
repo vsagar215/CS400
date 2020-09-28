@@ -63,7 +63,7 @@ public class HashTableMap implements MapADT<Integer, Patient> {
         } else {
             // Checks to see if the nonEmpty index has the key already stored
             for (int i = 0; i < table[hashIndex].size(); i++) {
-                if (table[hashIndex].get(i).hashCode() == key) {
+                if (table[hashIndex].get(i).hashCode(table.length) == key) {
                     //System.out.println("ALREADYADDED " + " Key: " + key + " Value: " + value + " HashIndex: " + Math.abs(key.hashCode()) % table.length);
                     return false;
                 }
@@ -110,7 +110,7 @@ public class HashTableMap implements MapADT<Integer, Patient> {
             for (int i = 0; i < tableCopy.length; i++) {
                 if (tableCopy[i] != null) {
                     for (int j = 0; j < tableCopy[i].size(); j++) {
-                        put(tableCopy[i].get(j).hashCode(), tableCopy[i].get(j));
+                        put(tableCopy[i].get(j).hashCode(table.length), tableCopy[i].get(j));
                     }
                 }
             }
@@ -163,7 +163,7 @@ public class HashTableMap implements MapADT<Integer, Patient> {
 
         if (containsKey(key)) {
             for (int i = 0; i < table[hashIndex].size(); i++) {
-                if (table[hashIndex].get(i).hashCode() == key) {
+                if (table[hashIndex].get(i).hashCode(table.length) == key) {
                     return table[hashIndex].get(i);
                 }
             }
@@ -193,7 +193,7 @@ public class HashTableMap implements MapADT<Integer, Patient> {
 
         if (table[hashIndex] != null) {
             for (int i = 0; i < table[hashIndex].size(); i++) {
-                if (table[hashIndex].get(i).hashCode() == key) {
+                if (table[hashIndex].get(i).hashCode(table.length) == key) {
                     return true;
                 }
             }
@@ -216,7 +216,7 @@ public class HashTableMap implements MapADT<Integer, Patient> {
         if (containsKey(key)) {
             Patient removedNode = null;
             for (int i = 0; i < table[hashIndex].size(); i++) {
-                if (table[hashIndex].get(i).hashCode() == key) {
+                if (table[hashIndex].get(i).hashCode(table.length) == key) {
                     removedNode = table[hashIndex].get(i);
                     
                     if (table[hashIndex].size() != 1) {
@@ -256,7 +256,19 @@ public class HashTableMap implements MapADT<Integer, Patient> {
         covidPos = 0;
     }
 
+    /**
+     * Reports number of positive covid tests
+     * @return covidPos
+     */
     public int numberOfCovidPos() {
         return covidPos;
+    }
+
+    /**
+     * Reports table capacity to be used as arg for Patent.hashCode(int capacity) method
+     * @return table.length
+     */
+    public int getCapacity() {
+        return table.length;
     }
 }

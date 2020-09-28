@@ -44,11 +44,19 @@ public class Patient {
     public String getName() {
         return name;
     }
+
+    /**
+     * Prints out all patient information
+     */
     public void info() {
         System.out.println("Facility: " + facility + " Floor: " + floor + " Covid: " + positive + " Age: " + age + " ID: " + id + " Name: " + name);
     }
 
-    public int hashCode() {
-        return ((name.hashCode() + age + id) * rand) % 500;
+    /**
+     * @param capacity capacity of the current hashtable to properly hash values
+     * @return hashCode used for key in hashtable
+     */
+    public int hashCode(int capacity) {
+        return ((name.hashCode() + age + id) * rand) % capacity;
     }
 }
